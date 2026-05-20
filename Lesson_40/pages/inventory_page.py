@@ -36,7 +36,7 @@ class InventoryPage(BasePage):
         add_buttons = self.find_all(self.ALL_ADD_BUTTONS)
 
         for button in add_buttons:
-            self.execute_script("arguments[0].scrollIntoView({block: 'center'});", button)
+            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", button)
             button.click()
             time.sleep(0.5)
 
