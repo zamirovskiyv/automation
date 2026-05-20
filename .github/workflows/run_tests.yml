@@ -1,0 +1,40 @@
+name: UI and API Tests
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  test-and-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Скачиваем код нашего проекта на сервер
+        uses: actions/checkout@v4
+
+      - name: 2. Устанавливаем Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.10
+
+      - name: 3. Устанавливаем зависимости
+        run: pip install -r requirements.txt
+
+      - name: 4. Запускаем автотесты
+        run: pytest tests/ -v --alluredir=allure-results
+
+        continue-on-error: true
+
+      - name: 5. Генерируем Allure отчет
+        uses: simple-elf/allure-report-action@master
+        if : always()
+        with:
+          allure-results: allure-results
+          allure-report: allure-report
+
+      - name: 6. Публикуем отчет на GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if : always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
