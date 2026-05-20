@@ -21,7 +21,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: 4. Запускаем автотесты
-        run: pytest tests/ -v --alluredir=allure-results
+        run: pytest Lesson_40/tests/ -v --alluredir=allure-results
 
         continue-on-error: true
 
