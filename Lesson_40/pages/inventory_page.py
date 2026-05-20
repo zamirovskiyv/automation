@@ -37,7 +37,7 @@ class InventoryPage(BasePage):
 
         for button in add_buttons:
             button.click()
-            time.sleep(0.2)
+            time.sleep(0.5)
 
         return self
 
