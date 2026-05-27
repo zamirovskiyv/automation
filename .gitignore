@@ -1,1 +1,8 @@
 allure-results/
+./venv/
+./venv1/
+__pycache__/
+./.idea/
+./github/
+./.vscode/
+*.log

@@ -33,11 +33,12 @@ class InventoryPage(BasePage):
 
     @allure.step('Добавление ВСЕХ доступных товаров в корзину')
     def add_all_items_to_cart(self):
-        add_buttons = self.find_all(self.ALL_ADD_BUTTONS)
+        count = len(self.find_all(self.ALL_ADD_BUTTONS))
 
-        for button in add_buttons:
-            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", button)
-            button.click()
+        for _ in range(count):
+            buttons = self.find_all(self.ALL_ADD_BUTTONS)
+            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", buttons[0])
+            buttons[0].click()
             time.sleep(0.5)
 
         return self
